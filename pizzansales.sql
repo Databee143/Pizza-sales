@@ -1,0 +1,60 @@
+use pizzadatabase
+
+select * from pizza_Sales
+
+select sum(total_price) as total_revenue
+from pizza_sales
+
+
+select sum(total_price)/count(distinct order_id) as average_order_value
+from pizza_sales
+
+
+select sum(quantity)as total_pizzas_sold
+from pizza_sales
+
+
+select count(distinct order_id) as total_orders
+from pizza_sales
+
+SELECT DAYNAME( order_date) AS order_day, COUNT(DISTINCT order_id) AS total_orders
+FROM pizza_sales
+GROUP BY DAYNAME(order_date);
+
+SELECT HOUR(ORDER_TIME) AS ORDER_HOURS, COUNT(DISTINCT ORDER_ID) AS TOTAL_ORDERS
+FROM PIZZA_SALES
+GROUP BY HOUR(ORDER_TIME)
+ORDER BY ORDER_HOURS;
+
+SELECT PIZZA_CATEGORY,SUM(TOTAL_PRICE) AS TOTAL_SALES, SUM(TOTAL_PRICE) * 100 / (SELECT SUM(TOTAL_PRICE)
+FROM PIZZA_SALES) AS PCT
+FROM PIZZA_SALES
+GROUP BY PIZZA_CATEGORY;
+
+
+
+SELECT PIZZA_SIZE,SUM(TOTAL_PRICE) AS TOTAL_SALES,SUM(TOTAL_PRICE) * 100 / (SELECT SUM(TOTAL_PRICE)
+FROM PIZZA_SALES) AS PCT
+FROM PIZZA_SALES
+GROUP BY PIZZA_SIZE
+ORDER BY PIZZA_SIZE ASC;
+
+SELECT PIZZA_CATEGORY,SUM(QUANTITY)AS TOTAL_PIZZA_SOLD
+FROM PIZZA_SALES
+GROUP BY PIZZA_CATEGORY
+
+SELECT * FROM PIZZA_SALES
+
+
+SELECT PIZZA_NAME, SUM(quantity) AS TOPPIZZASOL
+FROM PIZZA_SALES
+GROUP BY PIZZA_NAME
+ORDER BY sum(quantity) DESC
+LIMIT 5;
+
+
+SELECT PIZZA_NAME, SUM(quantity) AS TOPPIZZASOL
+FROM PIZZA_SALES
+GROUP BY PIZZA_NAME
+ORDER BY sum(quantity) asc
+LIMIT 5;
